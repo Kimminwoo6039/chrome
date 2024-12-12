@@ -40,7 +40,7 @@ export function GamblingProvider({children}: { children: ReactNode }) {
   const [isPaused, setIsPaused] = useState<boolean>(false);
   const processedUrls = useRef<Set<string>>(new Set());
   const {toast} = useToast();
-  
+
   const {setCapturedFile} = useScreenShare();
 
   class GamblingDetector {
@@ -63,6 +63,28 @@ export function GamblingProvider({children}: { children: ReactNode }) {
     private wordGroupC: string[] = [
       "이벤트", "사다리", "스포츠", "충전", "지급", "도박",
       "포인트", "입출금", "게임", "토큰", "인플레이", "토너먼트"
+    ];
+
+    private urlBlacklist: string[] = [
+      "www.bwzx",
+      "www.bet16",
+      "1bet1.bet",
+      "10x10v2a.com"
+    ];
+
+    private urlWhitelist: string[] = [
+      "naver.com", "daum.net", "coupang.com", "ticketmonster.co.kr",
+      "baedalMinjok.com", "gmarket.co.kr", "auction.co.kr", "nate.com",
+      "aladin.co.kr", "interpark.com", "ridibooks.com", "zigbang.com",
+      "kakaocorp.com", "melon.com", "tistory.com", "hani.co.kr",
+      "mycelebs.com", "cgv.co.kr", "baedal.com", "hankyung.com",
+      "news1.kr", "mnet.com", "onmap.co.kr", "friends.co.kr",
+      "kgc.co.kr", "ehmart.com", "viralmarketing.co.kr", "kurly.com",
+      "hankookilbo.com", "dcinside.com", "kofic.or.kr", "yna.co.kr",
+      "incheonilbo.com", "seoul.co.kr", "donga.com", "chosun.com",
+      "sisain.com", "sportsseoul.com", "kbs.co.kr", "jtbc.joins.com",
+      "jtbc.com", "imbc.com", "tvchosun.com", "kukinews.com", "hani.co.kr",
+      "inews24.com", "news1.kr"
     ];
 
     public gamble(content: string, url: string): DetectionResult {
@@ -107,10 +129,23 @@ export function GamblingProvider({children}: { children: ReactNode }) {
     }
 
     private weight(url: string): number {
-      // 화이트리스트/블랙리스트 구현...
-      return 1.0;
+      const PKG_WHITELIST_WEIGHT = 5.0;  // 화이트리스트 둔감하게
+      const PKG_BLACKLIST_WEIGHT = 0.0;  // 블랙리스트 즉시차단
+
+      let gambleWeight = 1.0;
+
+      // Check url blacklist
+      if (this.urlBlacklist.some(blacklist => url.includes(blacklist))) {
+        gambleWeight = PKG_BLACKLIST_WEIGHT;
+      }
+      // Check url whitelist
+      if (this.urlWhitelist.some(whitelist => url.includes(whitelist))) {
+        gambleWeight = PKG_WHITELIST_WEIGHT;
+      }
+      return gambleWeight;
     }
   }
+
 
   const initBlcokDB = async (): Promise<IDBDatabase> => {
     return new Promise((resolve, reject) => {
