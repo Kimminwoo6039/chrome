@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="7c2dfbcf-d02f-42c2-95d9-41c893e2c178" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/provider/gambling-context.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/provider/gambling-context.tsx" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+      </list>
+    </option>
+  </component>
+  <component name="FormatOnSaveOptions">
+    <option name="myRunOnSave" value="true" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="aaaaaaaaaaaaaaaaaaaaaaaaaaaaa" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitLabDefaultAccount">
+    <option name="defaultAccountId" value="f4bdd7ae-c184-4b75-9419-36c8303a3ba7" />
+  </component>
+  <component name="OptimizeOnSaveOptions">
+    <option name="myRunOnSave" value="true" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 8
+}</component>
+  <component name="ProjectId" id="2pkCxbkkmbOEepjlJTjJr9TwK13" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;dev&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/workspace/meercatch_chrome_-/public&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.stylelint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.stylelint&quot;: &quot;&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;npm.build.executor&quot;: &quot;Run&quot;,
+    &quot;npm.dev.executor&quot;: &quot;Run&quot;,
+    &quot;npm.start.executor&quot;: &quot;Run&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;actions.on.save&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\workspace\\meercatch_chrome_-\\node_modules\\typescript\\lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\workspace\meercatch_chrome_-\public" />
+      <recent name="C:\workspace\meercatch_chrome_-\src\app" />
+      <recent name="C:\workspace\meercatch_chrome_-\src" />
+      <recent name="C:\workspace\meercatch_chrome_-" />
+      <recent name="D:\next\pwa" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\workspace\meercatch_chrome_-\src\app" />
+      <recent name="D:\next\pwa\src\app\image\detection" />
+      <recent name="D:\next\pwa\src\lib\provider" />
+    </key>
+  </component>
+  <component name="RunManager" selected="npm.start">
+    <configuration name="build" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="build" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <configuration name="dev" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="dev" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <configuration name="start" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="start" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="npm.start" />
+        <item itemvalue="npm.build" />
+        <item itemvalue="npm.dev" />
+        <item itemvalue="npm.dev" />
+        <item itemvalue="npm.build" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9f38398b9061-18abd8497189-intellij.indexing.shared.core-IU-241.14494.240" />
+        <option value="bundled-js-predefined-1d06a55b98c1-74d2a5396914-JavaScript-IU-241.14494.240" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="7c2dfbcf-d02f-42c2-95d9-41c893e2c178" name="Changes" comment="" />
+      <created>1733300933996</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1733300933996</updated>
+      <workItem from="1733300935059" duration="3698000" />
+      <workItem from="1733354949535" duration="22472000" />
+      <workItem from="1733465086000" duration="6219000" />
+      <workItem from="1733700499713" duration="20504000" />
+      <workItem from="1733729826754" duration="4008000" />
+      <workItem from="1733787543167" duration="1360000" />
+      <workItem from="1733799541139" duration="4841000" />
+      <workItem from="1733817206877" duration="4098000" />
+      <workItem from="1733822340760" duration="671000" />
+      <workItem from="1733873801087" duration="1999000" />
+      <workItem from="1733879848360" duration="3381000" />
+      <workItem from="1733991299666" duration="3121000" />
+      <workItem from="1734046528268" duration="120000" />
+    </task>
+    <task id="LOCAL-00001" summary="in">
+      <option name="closed" value="true" />
+      <created>1733377546391</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1733377546391</updated>
+    </task>
+    <task id="LOCAL-00002" summary="in">
+      <option name="closed" value="true" />
+      <created>1733378175207</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1733378175207</updated>
+    </task>
+    <task id="LOCAL-00003" summary="in">
+      <option name="closed" value="true" />
+      <created>1733379149070</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1733379149070</updated>
+    </task>
+    <task id="LOCAL-00004" summary="in">
+      <option name="closed" value="true" />
+      <created>1733704482202</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1733704482202</updated>
+    </task>
+    <task id="LOCAL-00005" summary="in">
+      <option name="closed" value="true" />
+      <created>1733710519980</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1733710519980</updated>
+    </task>
+    <task id="LOCAL-00006" summary="in">
+      <option name="closed" value="true" />
+      <created>1733712090075</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1733712090075</updated>
+    </task>
+    <task id="LOCAL-00007" summary="in">
+      <option name="closed" value="true" />
+      <created>1733712498391</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1733712498391</updated>
+    </task>
+    <task id="LOCAL-00008" summary="in">
+      <option name="closed" value="true" />
+      <created>1733723298970</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1733723298970</updated>
+    </task>
+    <task id="LOCAL-00009" summary="in">
+      <option name="closed" value="true" />
+      <created>1733723346833</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1733723346833</updated>
+    </task>
+    <task id="LOCAL-00010" summary="in">
+      <option name="closed" value="true" />
+      <created>1733728143985</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1733728143985</updated>
+    </task>
+    <task id="LOCAL-00011" summary="in">
+      <option name="closed" value="true" />
+      <created>1733730642393</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1733730642393</updated>
+    </task>
+    <task id="LOCAL-00012" summary="in">
+      <option name="closed" value="true" />
+      <created>1733731611920</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1733731611920</updated>
+    </task>
+    <task id="LOCAL-00013" summary="class 수정">
+      <option name="closed" value="true" />
+      <created>1733814711630</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1733814711630</updated>
+    </task>
+    <task id="LOCAL-00014" summary="init">
+      <option name="closed" value="true" />
+      <created>1733875150368</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1733875150368</updated>
+    </task>
+    <task id="LOCAL-00015" summary="2024-12-11 김민우&#10;1. SSL 인증서 파일 추가&#10;2. 배포시 내부 Https 인증서 적용">
+      <option name="closed" value="true" />
+      <created>1733879162112</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1733879162112</updated>
+    </task>
+    <task id="LOCAL-00016" summary="2024-12-12 김민우&#10;1. icon 추가 및 manifest 추가">
+      <option name="closed" value="true" />
+      <created>1733991955955</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1733991955955</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="dev" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="class 수정" />
+    <MESSAGE value="init" />
+    <MESSAGE value="in" />
+    <MESSAGE value="2024-12-11 김민우&#10;1. SSL 인증서 파일 추가&#10;2. 배포시 내부 Https 인증서 적용" />
+    <MESSAGE value="2024-12-12 김민우&#10;1. icon 추가 및 manifest 추가" />
+    <option name="LAST_COMMIT_MESSAGE" value="2024-12-12 김민우&#10;1. icon 추가 및 manifest 추가" />
+  </component>
+</project>
