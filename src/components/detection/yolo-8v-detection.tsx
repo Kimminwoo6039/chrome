@@ -54,6 +54,7 @@ const YOLO_CLASSES = [
   '여성 유방 가리기',
   '둔부 가리기'
 ];
+
 // '여성 얼굴',
 
 // props 타입 정의 추가
@@ -221,9 +222,27 @@ const YOLOv8 = ({urlHistory = []}: YOLOv8Props) => {
       .map(col => [col, output[2100 * (col + 4) + index]])
       .reduce((accum, item) => item[1] > accum[1] ? item : accum, [0, 0]);
 
+
+        
+    // 검출할 클래스 인덱스
+    const targetClassIndices = [
+      2,  // 둔부 노출
+      3,  // 여성 유방 노출
+      4,  // 여성 생식기 노출
+      6,  // 항문 노출
+      14  // 남성 생식기 노출
+    ];
+
       if (prob < CONSTANTS.CONF_THRESHOLD) {
         continue;
       }
+
+
+      // 지정된 클래스만 검출
+      if (!targetClassIndices.includes(classId)) {
+        continue;
+      }
+
 
       // classId가 YOLO_CLASSES 범위를 벗어나지 않도록 확인
       if (classId >= YOLO_CLASSES.length) {
