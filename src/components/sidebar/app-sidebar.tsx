@@ -2,16 +2,8 @@
 
 import * as React from "react"
 import {BookOpen, Bot, SquareTerminal,} from "lucide-react"
-
-import {NavUser} from "@/components/sidebar/nav-user"
 import {TeamSwitcher} from "@/components/sidebar/team-switcher"
-import {
-  Sidebar,
-  SidebarContent,
-  SidebarFooter,
-  SidebarHeader,
-  SidebarRail,
-} from "@/components/ui/sidebar"
+import {Sidebar, SidebarContent, SidebarHeader, SidebarRail,} from "@/components/ui/sidebar"
 import {NavMain} from "@/components/sidebar/nav-main";
 
 // This is sample data.
@@ -52,7 +44,7 @@ const data = {
           url: "/image/detection",
         },
         {
-          title: "도박성 이미지",
+          title: "도박 이미지",
           url: "/image/gambling",
         },
       ],

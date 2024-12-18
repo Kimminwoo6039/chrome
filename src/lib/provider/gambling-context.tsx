@@ -40,7 +40,7 @@ export function GamblingProvider({children}: { children: ReactNode }) {
   const [isPaused, setIsPaused] = useState<boolean>(false);
   const processedUrls = useRef<Set<string>>(new Set());
   const {toast} = useToast();
-  
+
   const {setCapturedFile} = useScreenShare();
 
   class GamblingDetector {
@@ -318,7 +318,7 @@ export function GamblingProvider({children}: { children: ReactNode }) {
             currentData[0].검출유무 = 1;
             sendNotification('inappropriate', '도박 콘텐츠가 감지되었습니다.');
             toast({
-              title: "도박성 컨텐츠 감지",
+              title: "도박 컨텐츠 감지",
               description: "도박 관련 컨텐츠가 검출되었습니다.",
               variant: "destructive",
             });

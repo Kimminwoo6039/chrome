@@ -131,7 +131,7 @@ export default function Gambling() {
                     onClick={() => setViewMode('detections')}
                     size="sm"
                 >
-                  도박성 검출 ({detectionHistory.length})
+                  도박 검출 ({detectionHistory.length})
                 </Button>
               </div>
             </CardHeader>
@@ -161,7 +161,7 @@ export default function Gambling() {
                               </p>
                               {hasGamblingContent(item.content) && (
                                   <div className="mt-1 text-destructive text-sm flex items-center">
-                                    <span>⚠️ 도박성 컨텐츠 검출</span>
+                                    <span>⚠️ 도박 컨텐츠 검출</span>
                                   </div>
                               )}
                             </div>
@@ -256,7 +256,7 @@ export default function Gambling() {
                             <div className="bg-red-50 border-l-4 border-red-500 p-2 sm:p-4 rounded">
                     <span
                         className="text-red-700 font-semibold flex items-center gap-2 text-sm sm:text-base">
-                      ⚠️ 도박성 컨텐츠 검출
+                      ⚠️ 도박 컨텐츠 검출
                     </span>
                             </div>
                         )}

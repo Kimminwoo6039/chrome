@@ -26,7 +26,7 @@ export default function layout({children}) {
                 <BreadcrumbSeparator className="hidden md:block"/>
                 <BreadcrumbItem>
                   <Link href="/image/gambling">
-                    <BreadcrumbPage>도박성 이미지</BreadcrumbPage>
+                    <BreadcrumbPage>도박 이미지</BreadcrumbPage>
                   </Link>
                 </BreadcrumbItem>
               </BreadcrumbList>
