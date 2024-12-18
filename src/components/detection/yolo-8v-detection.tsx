@@ -3,7 +3,6 @@ import React, {useCallback, useEffect, useRef} from 'react';
 import * as ort from 'onnxruntime-web';
 import {useScreenShare} from "@/lib/provider/screen-share-context";
 import {UrlHistoryItem} from "@/lib/provider/gambling-context";
-import {useToast} from '@/hooks/use-toast';
 
 // 타입 정의
 type DetectionBox = [number, number, number, number, string, number];
@@ -151,6 +150,23 @@ const YOLOv8 = ({urlHistory = []}: YOLOv8Props) => {
       const transaction = db.transaction("images", "readwrite");
       const store = transaction.objectStore("images");
 
+      // 가장 최근 저장된 이미지 가져오기
+      const getAllRequest = store.getAll();
+      const records = await new Promise((resolve, reject) => {
+        getAllRequest.onsuccess = () => resolve(getAllRequest.result);
+        getAllRequest.onerror = () => reject(getAllRequest.error);
+      });
+
+      // 레코드가 있고, 마지막 저장된 이미지와 현재 이미지가 같다면 저장하지 않음
+      if (records && records.length > 0) {
+        const lastImage = records[records.length - 1];
+        if (lastImage.data === imageData) {
+          console.log('Duplicate image detected, skipping save');
+          return;
+        }
+      }
+
+      // 새로운 이미지 저장
       await store.add({data: imageData});
       console.log(`Image saved to ${dbName} successfully`);
     } catch (error) {
@@ -223,15 +239,14 @@ const YOLOv8 = ({urlHistory = []}: YOLOv8Props) => {
       .reduce((accum, item) => item[1] > accum[1] ? item : accum, [0, 0]);
 
 
-        
-    // 검출할 클래스 인덱스
-    const targetClassIndices = [
-      2,  // 둔부 노출
-      3,  // 여성 유방 노출
-      4,  // 여성 생식기 노출
-      6,  // 항문 노출
-      14  // 남성 생식기 노출
-    ];
+      // 검출할 클래스 인덱스
+      const targetClassIndices = [
+        2,  // 둔부 노출
+        3,  // 여성 유방 노출
+        4,  // 여성 생식기 노출
+        6,  // 항문 노출
+        14  // 남성 생식기 노출
+      ];
 
       if (prob < CONSTANTS.CONF_THRESHOLD) {
         continue;
