@@ -249,23 +249,53 @@ export function GamblingProvider({children}: { children: ReactNode }) {
 
   const saveDetection = async (detection: Omit<DetectionItem, 'id'>): Promise<number> => {
     const db = await initDB();
+    const transaction = db.transaction('detections', 'readwrite');
+
     return new Promise((resolve, reject) => {
       try {
-        const transaction = db.transaction('detections', 'readwrite');
         const store = transaction.objectStore('detections');
 
-        // timestamp와 함께 데이터 저장
-        const request = store.add({
-          ...detection,
-          timestamp: new Date().toISOString(),
-          id: Date.now() // 고유한 ID 생성
-        });
+        // 마지막 레코드 가져오기
+        const getAllRequest = store.getAll();
 
-        request.onsuccess = () => resolve(request.result as number);
-        request.onerror = () => reject(request.error);
+        getAllRequest.onsuccess = () => {
+          const existingDetections = getAllRequest.result;
+
+          if (existingDetections.length > 0) {
+            const lastDetection = existingDetections[existingDetections.length - 1];
+
+            // URL만 비교
+            if (lastDetection.url === detection.url) {
+              console.log('Duplicate URL found, skipping save');
+              resolve(-1);
+              return;
+            }
+          }
+
+          // 중복이 아닌 경우에만 저장
+          const newDetection = {
+            ...detection,
+            timestamp: new Date().toISOString(),
+            id: Date.now()
+          };
+
+          const addRequest = store.add(newDetection);
+
+          addRequest.onsuccess = () => {
+            console.log('Detection saved successfully');
+            resolve(addRequest.result as number);
+          };
+
+          addRequest.onerror = () => reject(addRequest.error);
+        };
+
+        getAllRequest.onerror = () => reject(getAllRequest.error);
+
       } catch (error) {
         console.error('저장 오류:', error);
         reject(error);
+      } finally {
+        transaction.oncomplete = () => db.close();
       }
     });
   };
