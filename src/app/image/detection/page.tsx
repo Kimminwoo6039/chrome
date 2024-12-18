@@ -109,28 +109,37 @@ export default function DetectionImage() {
           </DialogContent>
         </Dialog>
         <div className="flex flex-1 flex-col gap-4 p-4">
-          <div
-              className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
-            {images.map((image, i) => (
+          <div>
+            {images.length === 0 ? (
                 <div
-                    key={image.id}
-                    className="aspect-square rounded-xl bg-muted/50 overflow-hidden border border-border shadow-sm hover:shadow-md transition-shadow"
-                    onClick={() => image.data && handleImageClick(image.data, '도박 검출 이미지')}
-                >
-                  <div className="relative group h-full w-full">
-                    <img
-                        src={image.data}
-                        alt={`Detection ${i + 1}`}
-                        className="w-full h-full object-cover object-center"
-                        style={{width: "100%", height: "100%"}}
-                    />
-                    <div
-                        className="absolute bottom-2 right-2 text-xs text-foreground/75 bg-background/75 px-2 py-1 rounded">
-                      클릭하여 확대
-                    </div>
-                  </div>
+                    className="flex flex-col items-center justify-center min-h-[200px] text-muted-foreground">
+                  <p>저장된 이미지가 없습니다.</p>
                 </div>
-            ))}
+            ) : (
+                <div
+                    className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+                  {images.map((image, i) => (
+                      <div
+                          key={image.id}
+                          className="aspect-square rounded-xl bg-muted/50 overflow-hidden border border-border shadow-sm hover:shadow-md transition-shadow"
+                          onClick={() => image.data && handleImageClick(image.data, '도박 검출 이미지')}
+                      >
+                        <div className="relative group h-full w-full">
+                          <img
+                              src={image.data}
+                              alt={`Detection ${i + 1}`}
+                              className="w-full h-full object-cover object-center"
+                              style={{width: "100%", height: "100%"}}
+                          />
+                          <div
+                              className="absolute bottom-2 right-2 text-xs text-foreground/75 bg-background/75 px-2 py-1 rounded">
+                            클릭하여 확대
+                          </div>
+                        </div>
+                      </div>
+                  ))}
+                </div>
+            )}
           </div>
 
           {totalPages > 1 && (
