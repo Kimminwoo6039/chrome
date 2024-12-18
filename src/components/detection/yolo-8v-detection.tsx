@@ -28,7 +28,7 @@ const CONSTANTS = {
   CONF_THRESHOLD: 0.5,
   IOU_THRESHOLD: 0.7,
   INPUT_SIZE: 320,
-  ALERT_COOLDOWN: 6000,
+  ALERT_COOLDOWN: 5000,
   DB_VERSION: 1,
   NUM_BOXES: 2100
 };
@@ -395,19 +395,19 @@ const YOLOv8 = ({urlHistory = []}: YOLOv8Props) => {
     if (!currentUrl) return;
 
     // 차단 메시지 전송
-    window.postMessage(
-        {
-          type: "block",
-          source: "block",
-          identifier: 'URL_HISTORY_TRACKER_f7e8d9c6b5a4',
-          data: currentUrl,
-          duration: '1'
-        },
-        "*"
-    );
+    // window.postMessage(
+    //     {
+    //       type: "block",
+    //       source: "block",
+    //       identifier: 'URL_HISTORY_TRACKER_f7e8d9c6b5a4',
+    //       data: currentUrl,
+    //       duration: '1'
+    //     },
+    //     "*"
+    // );
 
     try {
-      await saveToBlockedSitesDB(currentUrl, 1); // 10분 차단
+      // await saveToBlockedSitesDB(currentUrl, 1); // 10분 차단
 
       // 성공적으로 처리된 경우에만 알림 전송 및 쿨다운 시작
       sendNotification('adult', '성인 콘텐츠가 감지되었습니다.');

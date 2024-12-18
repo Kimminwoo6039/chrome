@@ -323,19 +323,19 @@ export function GamblingProvider({children}: { children: ReactNode }) {
               variant: "destructive",
             });
 
-            window.postMessage(
-                {
-                  type: "block",
-                  source: "block",
-                  identifier: EXTENSION_IDENTIFIER,
-                  data: currentData[0].url,
-                  duration: '1'
-                },
-                "*"
-            );
+            // window.postMessage(
+            //     {
+            //       type: "block",
+            //       source: "block",
+            //       identifier: EXTENSION_IDENTIFIER,
+            //       data: currentData[0].url,
+            //       duration: '1'
+            //     },
+            //     "*"
+            // );
 
-            // BlockedSitesDB에도 저장
-            await saveToBlockedSitesDB(currentData[0].url, 1); // 10분 차단
+            // // BlockedSitesDB에도 저장
+            // await saveToBlockedSitesDB(currentData[0].url, 1); // 10분 차단
 
 
           }

@@ -69,18 +69,18 @@ const data = {
         },
       ],
     },
-    {
-      title: "차단",
-      url: "#",
-      icon: BookOpen,
-      isActive: true,
-      items: [
-        {
-          title: "사이트 차단",
-          url: "/block",
-        },
-      ],
-    },
+    // {
+    //   title: "차단",
+    //   url: "#",
+    //   icon: BookOpen,
+    //   isActive: true,
+    //   items: [
+    //     {
+    //       title: "사이트 차단",
+    //       url: "/block",
+    //     },
+    //   ],
+    // },
   ],
 }
 
@@ -93,9 +93,9 @@ export function AppSidebar({...props}: React.ComponentProps<typeof Sidebar>) {
         <SidebarContent>
           <NavMain items={data.navMain}/>
         </SidebarContent>
-        <SidebarFooter>
+        {/* <SidebarFooter>
           <NavUser user={data.user}/>
-        </SidebarFooter>
+        </SidebarFooter> */}
         <SidebarRail/>
       </Sidebar>
   )
