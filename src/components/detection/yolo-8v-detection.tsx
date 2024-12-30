@@ -16,6 +16,13 @@ interface PreprocessedData {
   };
 }
 
+interface ImageSection {
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+}
+
 interface NotificationOptions {
   title: string;
   icon: string;
@@ -25,7 +32,7 @@ interface NotificationOptions {
 const CONSTANTS = {
   MODEL_PATH: '/nude.onnx',
   CONF_THRESHOLD: 0.5,
-  IOU_THRESHOLD: 0.7,
+  IOU_THRESHOLD: 0.3,
   INPUT_SIZE: 320,
   ALERT_COOLDOWN: 5000,
   DB_VERSION: 1,
@@ -199,34 +206,156 @@ const YOLOv8 = ({urlHistory = []}: YOLOv8Props) => {
       const url = URL.createObjectURL(file);
 
       img.onload = () => {
-        const canvas = document.createElement('canvas');
-        canvas.width = CONSTANTS.INPUT_SIZE;
-        canvas.height = CONSTANTS.INPUT_SIZE;
-        const ctx = canvas.getContext('2d');
-
-        if (ctx) {
-          ctx.drawImage(img, 0, 0, CONSTANTS.INPUT_SIZE, CONSTANTS.INPUT_SIZE);
-          const imageData = ctx.getImageData(0, 0, CONSTANTS.INPUT_SIZE, CONSTANTS.INPUT_SIZE);
-          const {data} = imageData;
-          const [red, green, blue] = [new Array<number>(), new Array<number>(), new Array<number>()];
-
-          for (let i = 0; i < data.length; i += 4) {
-            red.push(data[i] / 255.0);
-            green.push(data[i + 1] / 255.0);
-            blue.push(data[i + 2] / 255.0);
-          }
-
-          URL.revokeObjectURL(url);
-          resolve({
-            tensor: [...red, ...green, ...blue],
-            originalSize: {width: img.width, height: img.height}
-          });
+        // 원본 이미지가 1000px을 넘는지 확인
+        if (img.width <= 1000 && img.height <= 1000) {
+          // 1000px 이하면 단일 처리
+          const singlePreprocessed = preprocessSingleSection(img, 0, 0, img.width, img.height);
+          resolve([singlePreprocessed]);
+          return;
         }
+
+        // 이미지 4등분 위치 계산
+        const sections: ImageSection[] = [
+          {x: 0, y: 0, width: img.width / 2, height: img.height / 2},
+          {x: img.width / 2, y: 0, width: img.width / 2, height: img.height / 2},
+          {x: 0, y: img.height / 2, width: img.width / 2, height: img.height / 2},
+          {x: img.width / 2, y: img.height / 2, width: img.width / 2, height: img.height / 2}
+        ];
+
+        // 각 섹션 전처리
+        const preprocessedSections = sections.map(section =>
+            preprocessSingleSection(img, section.x, section.y, section.width, section.height)
+        );
+
+        URL.revokeObjectURL(url);
+        resolve(preprocessedSections);
       };
 
       img.src = url;
     });
   }, []);
+
+  const preprocessSingleSection = (
+      img: HTMLImageElement,
+      startX: number,
+      startY: number,
+      width: number,
+      height: number
+  ): {
+    offset: { x: number; y: number };
+    tensor: number[];
+    originalSize: { width: number; height: number }
+  } => {
+    const canvas = document.createElement('canvas');
+    canvas.width = CONSTANTS.INPUT_SIZE;
+    canvas.height = CONSTANTS.INPUT_SIZE;
+    const ctx = canvas.getContext('2d');
+
+    if (!ctx) {
+      throw new Error('Cannot get 2D context');
+    }
+
+    // 섹션을 INPUT_SIZE로 리사이즈하여 그리기
+    ctx.drawImage(
+        img,
+        startX, startY, width, height,
+        0, 0, CONSTANTS.INPUT_SIZE, CONSTANTS.INPUT_SIZE
+    );
+
+    const imageData = ctx.getImageData(0, 0, CONSTANTS.INPUT_SIZE, CONSTANTS.INPUT_SIZE);
+    const {data} = imageData;
+    const [red, green, blue] = [new Array<number>(), new Array<number>(), new Array<number>()];
+
+    for (let i = 0; i < data.length; i += 4) {
+      red.push(data[i] / 255.0);
+      green.push(data[i + 1] / 255.0);
+      blue.push(data[i + 2] / 255.0);
+    }
+
+    return {
+      tensor: [...red, ...green, ...blue],
+      originalSize: {
+        width: width,
+        height: height
+      },
+      offset: {x: startX, y: startY}
+    };
+  };
+
+
+  const drawSplitDetections = async (
+      canvas: HTMLCanvasElement,
+      image: File,
+      allDetections: Array<{ boxes: DetectionBox[], sectionIndex: number }>
+  ) => {
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    const img = new Image();
+
+    img.onload = () => {
+      canvas.width = img.width;
+      canvas.height = img.height;
+      ctx.drawImage(img, 0, 0);
+
+      // 섹션별 오프셋 계산
+      const sectionOffsets = [
+        {x: 0, y: 0},
+        {x: img.width / 2, y: 0},
+        {x: 0, y: img.height / 2},
+        {x: img.width / 2, y: img.height / 2}
+      ];
+
+      let detectionFound = false;
+      const detectedLabels: string[] = [];
+
+      // 모든 섹션의 detection 그리기
+      allDetections.forEach(({boxes, sectionIndex}) => {
+        const offset = sectionOffsets[sectionIndex];
+
+        boxes.forEach(box => {
+          const [x1, y1, x2, y2, label, confidence] = box;
+
+          // 오프셋 적용하여 좌표 보정
+          const adjustedX1 = x1 + offset.x;
+          const adjustedY1 = y1 + offset.y;
+          const adjustedX2 = x2 + offset.x;
+          const adjustedY2 = y2 + offset.y;
+
+          // 박스 그리기
+          ctx.strokeStyle = "#00FF00";
+          ctx.lineWidth = 3;
+          ctx.strokeRect(adjustedX1, adjustedY1, adjustedX2 - adjustedX1, adjustedY2 - adjustedY1);
+
+          // 레이블 그리기
+          ctx.fillStyle = "#00FF00";
+          ctx.font = "18px serif";
+          const text = `${label} ${Math.round(confidence * 100)}%`;
+          const textWidth = ctx.measureText(text).width;
+
+          ctx.fillRect(adjustedX1, adjustedY1 - 25, textWidth + 10, 25);
+          ctx.fillStyle = "#000000";
+          ctx.fillText(text, adjustedX1 + 5, adjustedY1 - 5);
+
+          detectionFound = true;
+          detectedLabels.push(`${label} (${Math.round(confidence * 100)}%)`);
+        });
+      });
+
+      // 감지된 경우 처리
+      if (detectionFound) {
+        const newImageData = canvas.toDataURL('image/png');
+        saveImageToDB('DetectionImageDB', newImageData);
+        handleMessage();
+        console.log('감지된 객체들:', detectedLabels.join(', '));
+      }
+
+      URL.revokeObjectURL(img.src);
+    };
+
+    img.src = URL.createObjectURL(image);
+  };
+
 
   // 출력 처리
   const processOutputs = (output: Float32Array, imgWidth: number, imgHeight: number): DetectionBox[] => {
@@ -506,14 +635,27 @@ const YOLOv8 = ({urlHistory = []}: YOLOv8Props) => {
   }, [handleMessage]); // handleMessage를 의존성 배열에 추가
 
 
-  // 새 이미지 처리
+// handleNewImage 함수 수정
   const handleNewImage = async (file: File) => {
     try {
-      const preprocessedData = await preprocessImage(file);
-      const detections = await runDetection(preprocessedData);
+      const preprocessedSections = await preprocessImage(file);
+      const allDetections = [];
 
-      if (canvasRef.current) {
-        await drawDetections(canvasRef.current as HTMLCanvasElement, file, detections);
+      // 각 섹션별 감지 실행
+      for (let i = 0; i < preprocessedSections.length; i++) {
+        const detections = await runDetection(preprocessedSections[i]);
+        if (detections.length > 0) {
+          allDetections.push({
+            boxes: detections,
+            sectionIndex: i,
+            gridPosition: preprocessedSections[i].gridPosition
+          });
+        }
+      }
+
+      // 결과 그리기
+      if (canvasRef.current && allDetections.length > 0) {
+        await drawSplitDetections(canvasRef.current, file, allDetections);
       }
     } catch (error) {
       console.error('Image processing failed:', error);
